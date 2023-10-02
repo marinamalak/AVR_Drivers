@@ -1,0 +1,27 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+# Add inputs and outputs from these tool invocations to the build variables 
+C_SRCS += \
+../HAL/LED/Led_config.c \
+../HAL/LED/Led_prog.c 
+
+OBJS += \
+./HAL/LED/Led_config.o \
+./HAL/LED/Led_prog.o 
+
+C_DEPS += \
+./HAL/LED/Led_config.d \
+./HAL/LED/Led_prog.d 
+
+
+# Each subdirectory must supply rules for building sources it contributes
+HAL/LED/%.o: ../HAL/LED/%.c
+	@echo 'Building file: $<'
+	@echo 'Invoking: AVR Compiler'
+	avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=1000000UL -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -c -o "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+
