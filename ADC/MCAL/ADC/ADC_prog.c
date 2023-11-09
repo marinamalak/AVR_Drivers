@@ -124,10 +124,10 @@ ES_t ADC_enuRead(u16* copy_pu16value)
 
 #if ADC_ADJ ==RIGHT_ADJ
 	*copy_pu16value=ADCL;	//TO read from bit 2(ADC2)
-	*copy_pu16value|=((u16)ADCH<<8);  // To read bits in(ADCH)
+	*copy_pu16value |=((u16)ADCH<<8);  // To read bits in(ADCH)
 #elif ADC_ADJ ==LEFT_ADJ
 	*copy_pu16value=(DDCL>>6);
-	*copy_pu16value=(DDCH<<2);
+	*copy_pu16value|=(DDCH<<2);
 #else
 #error"ADC ADJ is wrong"
 #endif

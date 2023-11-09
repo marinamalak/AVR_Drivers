@@ -12,7 +12,9 @@ ES_t LCD_enuInit(void);
 
 ES_t LCD_enuDisplayChar(u8 Copy_u8char);
 
-ES_t LCD_enuDisplayIntegerNumber(u8 Copy_u8number);
+ES_t LCD_enuDisplayIntegerNumber(u8 Copy_u8Num);
+
+ES_t LCD_enuDisplayString(u8 *Copy_pu8Data);
 
 ES_t LCD_enuSendCommand(u8 Copy_u8command);
 

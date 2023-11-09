@@ -64,38 +64,60 @@ ES_t LCD_enuDisplayChar(u8 Copy_u8char)
 	return Local_enuErorrState;
 }
 
-ES_t LCD_enuDisplayIntegerNumber(u8 Copy_u8number)
+ES_t LCD_enuDisplayIntegerNumber(u8 Copy_u8Num)
 {
 	ES_t Local_enuErorrState=ES_NOK;
 
-	if(Copy_u8number >=0 && Copy_u8number<=9)
+	if(Copy_u8Num>=0 && Copy_u8Num<=9)
 	{
-		LCD_enuDisplayChar(0x30+Copy_u8number);
+		LCD_enuDisplayChar(0x30+Copy_u8Num);
 	}
 	else
 	{
-		u8 Local_u8Divisor=10;
-		u8 Local_u8Number=0;
+		u8 Local_u8Iterator=0;
+		u32 Local_u8Divisor=10;
 
 		while(1)
 		{
-			if((Copy_u8number%Local_u8Divisor) !=0)
+			if((Copy_u8Num/Local_u8Divisor)==0)
 			{
-				Local_u8Number =Copy_u8number%Local_u8Divisor;
-				Copy_u8number /=Local_u8Divisor;
-				LCD_enuDisplayChar(0x30+Local_u8Number);
+				for(u8 Local_u8Iter=0; Local_u8Iter<=Local_u8Iterator ;Local_u8Iter++)
+				{
+					Local_u8Divisor=Local_u8Divisor/10;
+					if((Copy_u8Num/Local_u8Divisor)>=0  && (Copy_u8Num/Local_u8Divisor)<=9 )
+					{
+						//LCD_enuDisplayChar(Array_u8Num[(Copy_u8Num/Local_u8Divisor)]);
+						//LCD_enuDisplayChar('0'+(Copy_u8Num/Local_u8Divisor));
+						LCD_enuDisplayChar(0x30+(Copy_u8Num/Local_u8Divisor));
+					}
+					Copy_u8Num= Copy_u8Num % Local_u8Divisor;
+				}
+				break;
 			}
 			else
 			{
-				LCD_enuDisplayChar(0x30+Copy_u8number);
-				break;
+				Local_u8Divisor=Local_u8Divisor*10;
+				Local_u8Iterator++;
 			}
 		}
-
 	}
 
 	return Local_enuErorrState;
 
+}
+
+ES_t LCD_enuDisplayString(u8 *Copy_pu8Data)
+{
+	ES_t Local_enuErrorState=ES_NOK;
+
+
+	while(*Copy_pu8Data)
+		{
+			LCD_enuDisplayChar(*Copy_pu8Data);
+			Copy_pu8Data++;
+		}
+
+	return Local_enuErrorState;
 }
 
 
